@@ -38,6 +38,16 @@
     }
 }
 
+.StarIcon {
+    mask-size: cover;
+    background-color: $yellow-100;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: 5px;
+    mask: url('http://localhost:3001/assets/icons/filters/star.svg')
+}
+
 .ExpandedIcon {
     color: $blue-100;
 }
