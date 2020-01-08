@@ -1,0 +1,21 @@
+@import '../scss/common.scss';
+
+.Button {
+    border-radius: 3px;
+    color: $white;
+    text-transform: capitalize;
+    margin-left: 15px;
+    padding: 0px 11px;
+    font-size: 12px;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: $white;
+    }
+
+    &.Button--primary {
+        background-color: $blue-200;
+        border-bottom: 2px solid darken($blue-200, 50%);
+    }
+}

@@ -1,0 +1,24 @@
+@import '../scss/common.scss';
+
+.Card {
+    width: 100%;
+    background-color: $white;
+    //border: 1px solid $gray-200;
+    box-shadow: 2px 2px 4px -4px $gray-200;
+    border-radius: 3px;
+}
+
+.CardWrap {
+    padding: 10px;
+
+    &.--with-border {
+        border-bottom: 2px solid $gray-100;
+    }
+}
+
+.CardTitle {
+    font-size: 14x;
+    color: $black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}

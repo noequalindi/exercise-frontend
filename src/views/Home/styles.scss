@@ -1,0 +1,16 @@
+@import '../../scss/common.scss';
+
+.Header {
+    background-color: $primary-color;
+    min-height: 12vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: white;
+}
+
+.Body {
+    margin-top: 20px
+}
+  
