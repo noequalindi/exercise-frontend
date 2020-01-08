@@ -16,7 +16,7 @@ class FilterComponent extends PureComponent {
                     <span className="CardTitle">Filtros</span>
                 </div>
                 <div className="CardWrap CardSection v-bottomBorder">
-                    <ExpandableContainer title="Nombre de Hotel" type="search" withIcon={true} />
+                    <ExpandableContainer title="Nombre de Hotel" type="search" withIcon={true} onPress={this.props.onSearch} />
                 </div>
                 <div className="CardWrap CardSection">
                     <ExpandableContainer title="Estrellas" type="star" withIcon={true} />

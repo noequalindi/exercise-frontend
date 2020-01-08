@@ -12,6 +12,7 @@ class ExpandableComponent extends PureComponent {
 
         this.state = {
             isOpened: true,
+            hotelName: '',
             stars: [
                 { amount: -1, value: 'all', text: 'Todas las estrellas', checked: true },
                 { amount: 5, value: 5, checked: false  },
@@ -24,32 +25,32 @@ class ExpandableComponent extends PureComponent {
     }
 
     _handleCheckPress = (value) => {
-        let stars = _.cloneDeep(this.state.stars);
+        let clonedStars = this.state.stars.slice();
 
         if ('all' === value) {
-            stars[0].checked = true;
-            stars.forEach(item => {
+            clonedStars[0].checked = true;
+            clonedStars.forEach(item => {
                 if ('all' !== item.value) {
                     item.checked = false;
                 }
             });
         } else {
-            stars[0].checked = false;
-            let clicked = stars.filter(item => item.value === value);
+            clonedStars[0].checked = false;
+            let clicked = clonedStars.filter(item => item.value === value);
             clicked[0].checked = !clicked[0].checked;
 
-            let starArray = _.cloneDeep(stars);
+            let starArray = clonedStars.slice();
             starArray.splice(0, 1);
             let allUnchecked = starArray.every(item => {
                 return 'all' !== item.value && !item.checked;
             });
 
             if (allUnchecked) {
-                stars[0].checked = true;
+                clonedStars[0].checked = true;
             }
         }
 
-        this.setState({stars: stars});
+        this.setState({stars: clonedStars});
     }
 
     _renderStarsStructure = () => {
@@ -58,7 +59,7 @@ class ExpandableComponent extends PureComponent {
         return stars.map((item, idx) => {
             return (
                 <div key={idx} className="StarCheckBoxRow">
-                    <input onClick={ () => this._handleCheckPress(item.value) } type="checkbox" value={item.value} checked={item.checked}/>
+                    <input onChange={ () => this._handleCheckPress(item.value) } type="checkbox" value={item.value} checked={item.checked}/>
                     {
                         item.text &&
                         <span className="StarCheckValue">{item.text}</span>
@@ -74,17 +75,41 @@ class ExpandableComponent extends PureComponent {
         });
     }
 
+    _handleOnPress = () => {
+        let { onPress } = this.props;
+        let { hotelName, stars } = this.state;
+
+        let checkedOnly = [];
+        console.log(stars);
+        if (stars[0].checked) {
+            let starArray = stars.slice();
+            starArray.splice(1, 0);
+            checkedOnly = starArray.filter(item => item.checked); 
+            console.log(checkedOnly);
+        }
+
+        if (onPress) onPress(hotelName, checkedOnly);
+    }
+
+    _onChange = (event) => {
+        this.setState({hotelName: event.target.value});
+    }
+
     _renderExpandableContentByType = () => {
         const {
-            type
+            type,
         } = this.props;
+
+        const { 
+            hotelName
+        } = this.state;
 
         switch(type) {
             case 'search':
                 return (
                     <div className="ExpandableItemRow">
-                        <input className="ExpandableFilterInput" placeholder="Ingrese el nombre del Hotel" type="text" />
-                        <button className="Button Button--primary">Buscar</button>
+                        <input onChange={this._onChange } className="ExpandableFilterInput" placeholder="Ingrese el nombre del Hotel" type="text" />
+                        <button onClick={this._handleOnPress} className="Button Button--primary">Buscar</button>
                     </div>
                 );
             case 'star': 
