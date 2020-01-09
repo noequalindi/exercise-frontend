@@ -8,18 +8,39 @@ import ComponentServices from '../../services/ComponentServices'
 class Home extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            dataHotels: []
+        }
+
     }
 
-    search = (hotelName, checkedStars) => {
-        console.log(hotelName, checkedStars);
-        //ComponentServices.getHotels()
+    componentDidMount() {
+        this.searchHotel('', null);
+    }
+
+    searchHotel(hotelName, checkedStars) {
+        ComponentServices.getHotels(hotelName, checkedStars).then( response => {
+           
+            if (response.data) {
+                this.setState({ dataHotels: response.data.result });
+            }
+
+        }).catch( err => {
+            console.log("There was an error "+ err)            
+        })
+    }
+
+    search = (hotelName, stars) => {
+        this.searchHotel(hotelName, stars);
     }
 
     render() {
+        const { dataHotels } = this.state
         return (
             <React.Fragment>
                 <header className="Header">
-                    <div className="container">
+                    <div className="">
                     <div className="row">
                         <div className="twelve columns">
                             <img src="http://localhost:3001/assets/images/logo-almundo.svg" />
@@ -28,13 +49,13 @@ class Home extends Component {
                     </div>
                 </header>
                 <div className="Body">
-                    <div className="container">
+                    <div className="">
                         <div className="row">
                             <div className="four columns">
                                 <FilterComponent onSearch={this.search} />
                             </div>
                             <div className="eight columns">
-                                <HotelsList />
+                                <HotelsList items={dataHotels} />
                             </div>
                         </div>
                     </div>

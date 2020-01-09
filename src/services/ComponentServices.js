@@ -3,7 +3,7 @@ import qs from 'qs';
 
 const ComponentServices = {
       getHotels: (name, stars) => {
-            return AxiosInstance.get('/hotels', qs.stringify({name: name, stars: stars}));
+            return AxiosInstance.get(`/hotels`, qs.stringify({name: name, stars: stars}));
       }
 }
 

@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react';
+import HotelDetail from '../HotelDetail/HotelDetail';
+
+import '../HotelsList/styles.scss';
 
 class HotelsList extends PureComponent {
     constructor(props) {
@@ -7,8 +10,12 @@ class HotelsList extends PureComponent {
 
     render() {
         return (
-            <div className="Card">
-                
+            <div className="HotelList">
+                { 
+                    this.props.items && this.props.items.map((item, idx) => {
+                        return <HotelDetail key={idx} item={item} />
+                    })
+                }
             </div>
         );
     }

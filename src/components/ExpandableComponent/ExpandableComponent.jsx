@@ -10,6 +10,8 @@ class ExpandableComponent extends PureComponent {
     constructor(props) {
         super(props);
 
+        this._handleOnPress = this._handleOnPress.bind(this);
+
         this.state = {
             isOpened: true,
             hotelName: '',
@@ -22,6 +24,10 @@ class ExpandableComponent extends PureComponent {
                 { amount: 1, value: 1, checked: false  }
             ]
         }
+    }
+
+    componentDidMount() {
+        console.log('hellooo');
     }
 
     _handleCheckPress = (value) => {
@@ -41,6 +47,7 @@ class ExpandableComponent extends PureComponent {
 
             let starArray = clonedStars.slice();
             starArray.splice(0, 1);
+            
             let allUnchecked = starArray.every(item => {
                 return 'all' !== item.value && !item.checked;
             });
@@ -75,8 +82,9 @@ class ExpandableComponent extends PureComponent {
         });
     }
 
-    _handleOnPress = () => {
+    _handleOnPress() {
         let { onPress } = this.props;
+        console.log(this.state.stars);
         let { hotelName, stars } = this.state;
 
         let checkedOnly = [];
@@ -109,7 +117,7 @@ class ExpandableComponent extends PureComponent {
                 return (
                     <div className="ExpandableItemRow">
                         <input onChange={this._onChange } className="ExpandableFilterInput" placeholder="Ingrese el nombre del Hotel" type="text" />
-                        <button onClick={this._handleOnPress} className="Button Button--primary">Buscar</button>
+                        <button onClick={ this._handleOnPress } className="Button Button--primary">Aceptar</button>
                     </div>
                 );
             case 'star': 

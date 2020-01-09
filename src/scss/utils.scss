@@ -3,3 +3,19 @@
 .v-bottomBorder {
     border-bottom: 2px solid $gray-100;
 }
+
+.v-verticalAlignTop {
+    align-self: flex-start;
+    justify-content: flex-start;
+}
+
+.v-verticalAlignCenter {
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.v-leftDotBorder {
+    border-left: 1px dashed $gray-50;
+}
+
