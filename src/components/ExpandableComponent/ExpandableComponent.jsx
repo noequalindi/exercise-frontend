@@ -1,67 +1,28 @@
 import React, { PureComponent } from 'react';
-import _ from 'lodash';
 
 import './styles.scss';
 import '../../scss/Button.scss';
 import '../../scss/StarCheckbox.scss';
 
 class ExpandableComponent extends PureComponent {
-    
+
     constructor(props) {
         super(props);
 
         this._handleOnPress = this._handleOnPress.bind(this);
 
         this.state = {
-            isOpened: true,
-            hotelName: '',
-            stars: [
-                { amount: -1, value: 'all', text: 'Todas las estrellas', checked: true },
-                { amount: 5, value: 5, checked: false  },
-                { amount: 4, value: 4, checked: false  },
-                { amount: 3, value: 3, checked: false  },
-                { amount: 2, value: 2, checked: false  },
-                { amount: 1, value: 1, checked: false  }
-            ]
+            isOpened: true
         }
-    }
-
-    componentDidMount() {
-        console.log('hellooo');
     }
 
     _handleCheckPress = (value) => {
-        let clonedStars = this.state.stars.slice();
-
-        if ('all' === value) {
-            clonedStars[0].checked = true;
-            clonedStars.forEach(item => {
-                if ('all' !== item.value) {
-                    item.checked = false;
-                }
-            });
-        } else {
-            clonedStars[0].checked = false;
-            let clicked = clonedStars.filter(item => item.value === value);
-            clicked[0].checked = !clicked[0].checked;
-
-            let starArray = clonedStars.slice();
-            starArray.splice(0, 1);
-            
-            let allUnchecked = starArray.every(item => {
-                return 'all' !== item.value && !item.checked;
-            });
-
-            if (allUnchecked) {
-                clonedStars[0].checked = true;
-            }
-        }
-
-        this.setState({stars: clonedStars});
+        const { onStarClick } = this.props;
+        if (onStarClick) onStarClick(value);
     }
 
     _renderStarsStructure = () => {
-        const { stars } = this.state;
+        const { stars } = this.props;
 
         return stars.map((item, idx) => {
             return (
@@ -70,7 +31,7 @@ class ExpandableComponent extends PureComponent {
                     {
                         item.text &&
                         <span className="StarCheckValue">{item.text}</span>
-                    }  
+                    }
                     {
                         item.amount !== -1 &&
                         Array(item.amount).fill('').map((val, idx) => {
@@ -83,34 +44,19 @@ class ExpandableComponent extends PureComponent {
     }
 
     _handleOnPress() {
-        let { onPress } = this.props;
-        console.log(this.state.stars);
-        let { hotelName, stars } = this.state;
-
-        let checkedOnly = [];
-        console.log(stars);
-        if (stars[0].checked) {
-            let starArray = stars.slice();
-            starArray.splice(1, 0);
-            checkedOnly = starArray.filter(item => item.checked); 
-            console.log(checkedOnly);
-        }
-
-        if (onPress) onPress(hotelName, checkedOnly);
+        const { onSearch } = this.props;
+        if (onSearch) onSearch();
     }
 
     _onChange = (event) => {
-        this.setState({hotelName: event.target.value});
+        const { onSetHotel } = this.props;
+        if (onSetHotel) onSetHotel(event);
     }
 
     _renderExpandableContentByType = () => {
         const {
             type,
         } = this.props;
-
-        const { 
-            hotelName
-        } = this.state;
 
         switch(type) {
             case 'search':
@@ -120,14 +66,14 @@ class ExpandableComponent extends PureComponent {
                         <button onClick={ this._handleOnPress } className="Button Button--primary">Aceptar</button>
                     </div>
                 );
-            case 'star': 
+            case 'star':
                 return (
                     <div className="StarCheckbox">
                         { this._renderStarsStructure() }
                     </div>
                 );
             default:
-                return <div>Ah re loco!</div> 
+                return <div>Ah re loco!</div>
         }
     }
 
@@ -147,7 +93,7 @@ class ExpandableComponent extends PureComponent {
     }
 
     render() {
-        const { 
+        const {
             isOpened
         } = this.state;
 
@@ -165,7 +111,7 @@ class ExpandableComponent extends PureComponent {
                             :
                             <span className="ExpandedIcon">▼</span>
                         }
-                    </button> 
+                    </button>
                 </div>
                 {
                     isOpened && this._renderExpandableContentByType()

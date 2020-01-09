@@ -5,30 +5,26 @@ import '../../scss/utils.scss';
 import '../../scss/Icons.scss';
 
 class HotelDetail extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   renderStars(amount) {
-    return Array(amount).fill('').map(amount => {
-        return <span key={amount} className="stars" />
+    return Array(amount).fill('').map((amount, idx) => {
+        return <span key={idx} className="stars" />
     });
   }
 
   renderAmenities(item) {
-      return item.map( amenitie => {   
-            return <span className={`Amenities ${amenitie}`} title={amenitie}></span>
-      }) 
+      return item.map((amenitie, idx) => {
+            return <span key={idx} className={`Amenities ${amenitie}`} title={amenitie}></span>
+      })
   }
 
   render() {
     const { item } = this.props;
-    
+
     return (
       <div className="LongCard">
         <div className="LongCard-Column">
             <div className="LongCard-ImageContainer">
-                <img className="LongCard-Image" src={`http://localhost:3001/assets/images/hotels/${item.image}`}/>
+                <img alt="Hotel" className="LongCard-Image" src={`http://localhost:3001/assets/images/hotels/${item.image}`}/>
             </div>
         </div>
         <div className="LongCard-Column LongCard-Body v-verticalAlignTop">
