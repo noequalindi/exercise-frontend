@@ -3,9 +3,9 @@
 .Card {
     width: 100%;
     background-color: $white;
-    //border: 1px solid $gray-200;
     box-shadow: 2px 2px 4px -4px $gray-200;
     border-radius: 3px;
+
     &.--b-transparent {
         background: transparent;
     }
@@ -33,6 +33,10 @@
     font-weight: bold;
 }
 
+.CardMobileExpand {
+    display: none;
+}
+
 .LongCard {
     height: 220px;
     background-color: $white;
@@ -57,6 +61,7 @@
         width: 180px;
         text-align: center;
         height: 95%;
+        border-left: 1px dashed $gray-50;
     }
 }
 
@@ -71,4 +76,53 @@
     width: 100%;
     height: 100%;
     background-size: contain;
+}
+
+@media (max-width: 550px) {
+    .CardTitleContainer {
+        text-align: center;
+    }
+
+    .CardTitle {
+        color: $blue-100;
+    }
+
+    .CardMobileExpand {
+        border: none;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        display: inline-block;
+    }
+
+    .CardFilters-desktop {
+        display: none;
+    }
+}
+
+@media (max-width: 1060px) {
+    .LongCard {
+        flex-direction: column;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .LongCard-Column {
+        height: auto;
+
+        &.LongCard-Column--short {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            border-left: none;
+            border-top: 1px dashed $gray-50;
+        }
+    }
+
+    .LongCard-ImageContainer {
+        padding: 0;
+    }
 }

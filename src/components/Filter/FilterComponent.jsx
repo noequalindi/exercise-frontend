@@ -10,6 +10,7 @@ class FilterComponent extends PureComponent {
 
         this.state = {
             hotelName: '',
+            isExpanded: false,
             stars: [
                 { amount: -1, value: 'all', text: 'Todas las estrellas', checked: true },
                 { amount: 5, value: 5, checked: false  },
@@ -73,29 +74,66 @@ class FilterComponent extends PureComponent {
 
     }
 
+    toggleFilter = () => {
+        this.setState({isExpanded: !this.state.isExpanded});
+    }
+
     render() {
-        const { stars } = this.state;
+        const { stars, isExpanded } = this.state;
         return (
             <div className="Card">
                 <div className="CardWrap CardTitleContainer v-bottomBorder">
                     <span className="CardTitle">Filtros</span>
+                    <button className="CardMobileExpand" onClick={ this.toggleFilter }>
+                    {
+                            isExpanded ?
+                            <span className="ExpandedIcon">▲</span>
+                            :
+                            <span className="ExpandedIcon">▼</span>
+                    }
+                    </button>
                 </div>
-                <div className="CardWrap CardSection v-bottomBorder">
-                    <ExpandableContainer
-                        title="Nombre de Hotel"
-                        type="search"
-                        withIcon={true}
-                        stars={stars}
-                        onSetHotel={this._handleSetHotel}
-                        onSearch={this._handleOnSearch} />
-                </div>
-                <div className="CardWrap CardSection">
-                    <ExpandableContainer
-                        title="Estrellas"
-                        type="star"
-                        withIcon={true}
-                        stars={stars}
-                        onStarClick={this._handleStarClick} />
+                {
+                    isExpanded &&
+                    <div className="CardFilters-mobile">
+                        <div className="CardWrap CardSection v-bottomBorder">
+                            <ExpandableContainer
+                                title="Nombre de Hotel"
+                                type="search"
+                                withIcon={true}
+                                stars={stars}
+                                onSetHotel={this._handleSetHotel}
+                                onSearch={this._handleOnSearch} />
+                        </div>
+                        <div className="CardWrap CardSection">
+                            <ExpandableContainer
+                                title="Estrellas"
+                                type="star"
+                                withIcon={true}
+                                stars={stars}
+                                onStarClick={this._handleStarClick} />
+                        </div>
+                    </div>
+                }
+
+                <div className="CardFilters-desktop">
+                    <div className="CardWrap CardSection v-bottomBorder">
+                        <ExpandableContainer
+                            title="Nombre de Hotel"
+                            type="search"
+                            withIcon={true}
+                            stars={stars}
+                            onSetHotel={this._handleSetHotel}
+                            onSearch={this._handleOnSearch} />
+                    </div>
+                    <div className="CardWrap CardSection">
+                        <ExpandableContainer
+                            title="Estrellas"
+                            type="star"
+                            withIcon={true}
+                            stars={stars}
+                            onStarClick={this._handleStarClick} />
+                    </div>
                 </div>
             </div>
         );

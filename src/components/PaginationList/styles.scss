@@ -1,0 +1,23 @@
+@import '../../scss/common.scss';
+.PaginationItem {
+    list-style: none;
+    display: flex;
+}
+.PaginationLink {
+    background-color: $blue-200;
+    display: inline-block;
+    color: $white;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+
+    &.--Button {
+        border: none;
+        display: inline-block;
+        width:  100%;
+        height: 100%;
+        padding:5px;    
+    }
+
+}

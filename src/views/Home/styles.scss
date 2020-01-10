@@ -82,3 +82,9 @@
     0%,100% { opacity: 0; }
     50% { opacity: 1; }
 }
+
+@media (max-width: 550px) {
+    .Body {
+        margin-top: 0;
+    }
+}
