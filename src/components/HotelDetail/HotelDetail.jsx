@@ -4,7 +4,18 @@ import '../../scss/Button.scss';
 import '../../scss/utils.scss';
 import '../../scss/Icons.scss';
 
+
 class HotelDetail extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.srcReference = "http://localhost:3001/assets/images/hotels/"
+    this.placeHolderImage =  "http://localhost:3001/assets/images/hotels/non-existent.png"
+
+    this.state = {
+      error: false
+    }
+  }
   renderStars(amount) {
     return Array(amount).fill('').map((amount, idx) => {
         return <span key={idx} className="stars" />
@@ -24,7 +35,10 @@ class HotelDetail extends PureComponent {
       <div className="LongCard">
         <div className="LongCard-Column">
             <div className="LongCard-ImageContainer">
-                <img alt="Hotel" className="LongCard-Image" src={`http://localhost:3001/assets/images/hotels/${item.image}`}/>
+                <img alt="Hotel" className="LongCard-Image" 
+                src={this.srcReference + item.image} 
+                ref={ img => this.img = img } 
+                onError={ () => this.img.src = this.placeHolderImage }/> 
             </div>
         </div>
         <div className="LongCard-Column LongCard-Body v-verticalAlignTop">

@@ -1,9 +1,8 @@
 import AxiosInstance from './serviceConfig';
-import qs from 'qs';
 
 const ComponentServices = {
-      getHotels: (name, stars) => {
-            return AxiosInstance.get(`/hotels`, qs.stringify({name: name, stars: stars}));
+      getHotels: (name, stars, index) => {
+            return AxiosInstance.get(`/hotels`, { params: { name: name, stars: stars.join(';'), p: index }} );
       }
 }
 

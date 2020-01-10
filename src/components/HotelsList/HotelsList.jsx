@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
 import HotelDetail from '../HotelDetail/HotelDetail';
+import PaginationList from '../PaginationList/PaginationList';
 
 import '../HotelsList/styles.scss';
 
 class HotelsList extends PureComponent {
+
     render() {
+        const { onPageClicked } = this.props;
+        
         return (
             <div className="HotelList">
                 {
@@ -12,6 +16,7 @@ class HotelsList extends PureComponent {
                         return <HotelDetail key={idx} item={item} />
                     })
                 }
+                <PaginationList onPageClick={onPageClicked} pages={this.props.pages} pageIndex={this.props.pageIndex}/>
             </div>
         );
     }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import noResults from '../../assets/images/no-results-marker.svg';
 import logo from '../../assets/images/almundo.png';
 import '../Home/styles.scss';
@@ -14,13 +13,17 @@ class Home extends Component {
         this.state = {
             loading: true,
             currentAppState: 1,
-            dataHotels: []
+            dataHotels: [],
+            hotelName: '',
+            stars: [],
+            pages: null,
+            pageIndex: 1,
         }
 
     }
 
     componentDidMount() {
-        this.searchHotel('', null);
+        this.searchHotel();
     }
 
     _setNoResults = () => {
@@ -30,14 +33,17 @@ class Home extends Component {
         });
     }
 
-    searchHotel(hotelName, checkedStars) {
+    searchHotel() {
+        const { hotelName, stars, pageIndex } = this.state;
         this.setState({loading: true}, () => {
-            ComponentServices.getHotels(hotelName, checkedStars).then( response => {
+            ComponentServices.getHotels(hotelName, stars, pageIndex).then( response => {
                 if (response.data.result && response.data.result.length > 0) {
                     this.setState({
                         loading: false,
                         currentAppState: 1,
-                        dataHotels: response.data.result
+                        dataHotels: response.data.result,
+                        pages: response.data.pageCount,
+                        pageIndex: response.data.page
                     });
                 } else {
                     this._setNoResults();
@@ -50,11 +56,19 @@ class Home extends Component {
     }
 
     search = (hotelName, stars) => {
-        this.searchHotel(hotelName, stars);
+        this.setState({ hotelName: hotelName, stars: stars, pageIndex: 1 }, () => {
+            this.searchHotel();
+        });
+    }
+
+    _handlePageClicked = (pageIndex) => {
+        this.setState({pageIndex: pageIndex}, () => {
+            this.searchHotel();
+        });
     }
 
     render() {
-        const { dataHotels, currentAppState, loading } = this.state
+        const { dataHotels, currentAppState, loading, pages, pageIndex } = this.state
         return (
             <React.Fragment>
                 <header className="Header">
@@ -85,7 +99,7 @@ class Home extends Component {
                                 }
                                 {
                                     1 === currentAppState && !loading &&
-                                    <HotelsList items={dataHotels} />
+                                    <HotelsList items={dataHotels} pages={pages} pageIndex={pageIndex} onPageClicked={this._handlePageClicked}/>
                                 }
                                 {
                                     0 === currentAppState &&
