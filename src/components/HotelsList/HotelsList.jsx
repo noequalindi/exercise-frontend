@@ -7,7 +7,7 @@ import '../HotelsList/styles.scss';
 class HotelsList extends PureComponent {
 
     render() {
-        const { onPageClicked } = this.props;
+        const { onPageClicked, onPrev, onNext } = this.props;
         
         return (
             <div className="HotelList">
@@ -16,7 +16,7 @@ class HotelsList extends PureComponent {
                         return <HotelDetail key={idx} item={item} />
                     })
                 }
-                <PaginationList onPageClick={onPageClicked} pages={this.props.pages} pageIndex={this.props.pageIndex}/>
+                <PaginationList onPageClick={onPageClicked} onPrev={onPrev} onNext={onNext} pages={this.props.pages} pageIndex={this.props.pageIndex}/>
             </div>
         );
     }

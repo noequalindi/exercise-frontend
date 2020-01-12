@@ -4,7 +4,7 @@ import './styles.scss';
 import '../../scss/Button.scss';
 import '../../scss/StarCheckbox.scss';
 
-class ExpandableComponent extends PureComponent {
+class FilterExpandable extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -121,4 +121,4 @@ class ExpandableComponent extends PureComponent {
     }
 }
 
-export default ExpandableComponent;
+export default FilterExpandable;

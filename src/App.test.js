@@ -2,8 +2,16 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('Render title of filters', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleElement = getByText(/Filtros/i);
+  const filterStars = getByText(/Todas las estrellas/i)
+  expect(titleElement).toBeInTheDocument();
+  expect(filterStars).toBeInTheDocument();
 });
+
+test('At the first time, 10 pages of hotels', () => {
+  //const { getByDisplayValue } = render(<App/>);
+  //const initialPages = getByDisplayValue(/10/i);
+  //expect(initialPages).toBeInTheDocument();
+})

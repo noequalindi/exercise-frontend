@@ -50,7 +50,7 @@ class Home extends Component {
                 }
             }).catch( err => {
                 this._setNoResults();
-                console.log("There was an error "+ err)
+                console.log("There was an error " + err)
             });
         });
     }
@@ -63,6 +63,12 @@ class Home extends Component {
 
     _handlePageClicked = (pageIndex) => {
         this.setState({pageIndex: pageIndex}, () => {
+            this.searchHotel();
+        });
+    }
+
+    _handleIndexChange = (index) => {
+        this.setState({pageIndex: index}, () => {
             this.searchHotel();
         });
     }
@@ -99,7 +105,14 @@ class Home extends Component {
                                 }
                                 {
                                     1 === currentAppState && !loading &&
-                                    <HotelsList items={dataHotels} pages={pages} pageIndex={pageIndex} onPageClicked={this._handlePageClicked}/>
+                                    <HotelsList 
+                                        items={dataHotels} 
+                                        pages={pages} 
+                                        pageIndex={pageIndex}
+                                        onPrev={ this._handleIndexChange }
+                                        onNext={ this._handleIndexChange } 
+                                        onPageClicked={this._handlePageClicked}
+                                    />
                                 }
                                 {
                                     0 === currentAppState &&
