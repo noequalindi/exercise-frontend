@@ -38,6 +38,8 @@
     "@testing-library/react": "^9.4.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-15": "^1.4.1",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest-enzyme": "^7.1.2",
     "react-addons-test-utils": "^15.6.2",
     "react-test-render": "^1.1.2",
     "react-test-renderer": "^16.12.0"

@@ -70,8 +70,8 @@ class FilterExpandable extends PureComponent {
             case 'search':
                 return (
                     <div className="ExpandableItemRow">
-                        <input onChange={this._onChange } onKeyPress={ (event) => { if (event.key === "Enter") { this._handleOnPress()}}} className="ExpandableFilterInput" placeholder="Ingrese el nombre del Hotel" type="text" />
-                        <button onClick={ this._handleOnPress } className="Button Button--primary">Aceptar</button>
+                        <input id="ExpandableFilterInput" onChange={this._onChange } onKeyPress={ (event) => { if (event.key === "Enter") { this._handleOnPress()}}} className="ExpandableFilterInput" placeholder="Ingrese el nombre del Hotel" type="text" />
+                        <button id="SearchButton" onClick={ this._handleOnPress } className="Button Button--primary">Aceptar</button>
                     </div>
                 );
             case 'star':
