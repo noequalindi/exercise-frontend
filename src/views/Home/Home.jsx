@@ -5,6 +5,7 @@ import '../Home/styles.scss';
 import HotelsList from '../../components/HotelsList/HotelsList';
 import FilterComponent from '../../components/Filter/FilterComponent';
 import ComponentServices from '../../services/ComponentServices'
+import * as Constants from '../../utils/constants.js'
 
 class Home extends Component {
     constructor(props) {
@@ -81,7 +82,7 @@ class Home extends Component {
                     <div className="">
                     <div className="row">
                         <div className="twelve columns">
-                            <img className="Header-logo" alt="logoBrand" src="http://localhost:3001/assets/images/logo-almundo.svg" />
+                            <img className="Header-logo" alt="logoBrand" src={`${Constants.IMAGES_URL}/logo-almundo.svg`} />
                         </div>
                     </div>
                     </div>

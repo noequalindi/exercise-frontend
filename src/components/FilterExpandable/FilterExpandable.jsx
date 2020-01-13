@@ -53,6 +53,14 @@ class FilterExpandable extends PureComponent {
         if (onSetHotel) onSetHotel(event);
     }
 
+    _onKeyPress = (event) => {
+        const { onSearch } = this.props;
+         if(event.keyCode === 13) {
+             console.log("HOLAAAAAAA")
+            if (onSearch) onSearch();
+        }
+    }
+
     _renderExpandableContentByType = () => {
         const {
             type,
@@ -62,7 +70,7 @@ class FilterExpandable extends PureComponent {
             case 'search':
                 return (
                     <div className="ExpandableItemRow">
-                        <input onChange={this._onChange } className="ExpandableFilterInput" placeholder="Ingrese el nombre del Hotel" type="text" />
+                        <input onChange={this._onChange } onKeyPress={ (event) => { if (event.key === "Enter") { this._handleOnPress()}}} className="ExpandableFilterInput" placeholder="Ingrese el nombre del Hotel" type="text" />
                         <button onClick={ this._handleOnPress } className="Button Button--primary">Aceptar</button>
                     </div>
                 );
@@ -73,7 +81,7 @@ class FilterExpandable extends PureComponent {
                     </div>
                 );
             default:
-                return <div>Ah re loco!</div>
+                return null
         }
     }
 
