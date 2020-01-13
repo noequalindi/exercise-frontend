@@ -89,8 +89,8 @@ class Home extends Component {
                 </header>
                 <div className="Body">
                     <div className="">
-                        <div className="row">
-                            <div className="four columns">
+                        <div className="row" data-testid="allComponents">
+                            <div className="four columns" data-testid="filterContainer">
                                 <FilterComponent onSearch={this.search} />
                             </div>
                             <div className="eight columns v-positionRelative">
