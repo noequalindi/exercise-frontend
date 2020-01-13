@@ -53,13 +53,6 @@ class FilterExpandable extends PureComponent {
         if (onSetHotel) onSetHotel(event);
     }
 
-    _onKeyPress = (event) => {
-        const { onSearch } = this.props;
-         if(event.keyCode === 13) {
-             console.log("HOLAAAAAAA")
-            if (onSearch) onSearch();
-        }
-    }
 
     _renderExpandableContentByType = () => {
         const {
